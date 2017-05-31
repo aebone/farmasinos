@@ -63,10 +63,8 @@ before_filter :load_categories
   end
 
   private
-      def load_categories
-
+    def load_categories
       @categories = Category.all
-
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_product
@@ -75,6 +73,6 @@ before_filter :load_categories
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :expires_on, :image, :category_id, :description, :quantity, :category)
+      params.require(:product).permit(:name, :expires_on, :image, :category_id, :description, :quantity)
     end
 end
