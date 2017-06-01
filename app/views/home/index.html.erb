@@ -1,5 +1,14 @@
 <div class="jumbotron">
   <h1>FarmaSinos</h1>
   <p>Sistema para gerenciamento de estoque de medicamentos e outros itens da FarmaSinos.</p>
-  <p><%= link_to "Cadastrar", new_user_registration_path, :class => 'btn btn-primary btn-lg'  %>&nbsp;&nbsp;<%= link_to "Logar", new_user_session_path, :class => 'btn btn-primary btn-lg'  %></p>
+  <p>
+     <% if user_signed_in? %>
+        <%= link_to 'Editar perfil', edit_user_registration_path, :class => 'btn btn-primary btn-lg' %>
+        <%= link_to "Sair", destroy_user_session_path, method: :delete, :class => 'btn btn-primary btn-lg' %>
+        <br><br>Logado como <strong><%= current_user.email %></strong>
+      <% else %>
+        <%= link_to "Cadastrar", new_user_registration_path, :class => 'btn btn-primary btn-lg'  %>
+        <%= link_to "Logar", new_user_session_path, :class => 'btn btn-primary btn-lg'  %>
+      <% end %>
+  </p>
 </div>
