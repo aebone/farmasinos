@@ -1,35 +1,32 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Products</h1>
+<h3>Escolha uma categoria</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Expires on</th>
-      <th>Image</th>
-      <th>Description</th>
-      <th>Quantity</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.name %></td>
-        <td><%= product.expires_on %></td>
-        <td><%= product.image %></td>
-        <td><%= product.description %></td>
-        <td><%= product.quantity %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<% @categories.each do |c| %>
+  <%= link_to(c.name,{:controller => "products",:action => "index", :category_id => c.id}, class: "btn btn-sm btn-primary") %> &nbsp;
+<% end %>
+<hr>
+<% @products.each do |product| %>
+<div class="row">
+  <div class="col-md-2 thumbnail">
+    <%= image_tag product.image %>
+  </div>
+  <div class="col-md-10">
+    <h2><%= product.name %></h2>
+    <p><strong>Validade:</strong> <%= product.expires_on.strftime("%d.%m.%Y") %></p>
+    <p><strong>Descrição:</strong> <%= product.description %></p>
+    <p><strong>Quantidade:</strong> <%= product.quantity %></p>
+    <p><strong>Categoria:</strong> <%= product.category.name %></p>
+    <% if current_user.id == 1 %>
+    <p><%= link_to 'Editar', edit_product_path(product) %> | <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></p>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
+<hr>
+<% end %>
 
 <br>
 
-<%= link_to 'New Product', new_product_path %>
+<% if current_user.id == 1 %>
+<%= link_to 'Novo Produto', new_product_path %>
+<% end %>

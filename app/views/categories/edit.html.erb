@@ -1,6 +1,17 @@
+<% if current_user.id == 1 %>
+
 <h1>Editar Categoria</h1>
 
 <%= render 'form', category: @category %>
 
 <%= link_to 'Ver', @category %> |
+
+<% else %>
+
+<p>Apenas o administrador pode editar uma categoria</p>
+<%= link_to "Sair", destroy_user_session_path, method: :delete, :class => 'btn btn-danger'  %>
+
+<% end %>
+
+<br>
 <%= link_to 'Voltar', categories_path %>

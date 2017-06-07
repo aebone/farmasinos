@@ -1,5 +1,15 @@
+<% if current_user.id == 1 %>
+
 <h1>Nova Categoria</h1>
 
 <%= render 'form', category: @category %>
 
-<%= link_to 'Back', categories_path %>
+<% else %>
+
+<p>Apenas o administrador pode criar uma categoria</p>
+<%= link_to "Sair", destroy_user_session_path, method: :delete, :class => 'btn btn-danger'  %>
+
+<% end %>
+
+<br>
+<%= link_to 'Voltar', categories_path %>

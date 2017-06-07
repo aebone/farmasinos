@@ -1,6 +1,14 @@
+<% if current_user.id == 1 %>
+
 <h1>Editar Produto</h1>
 
 <%= render 'form', product: @product %>
 
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>
+<%= link_to 'Voltar', products_path %>
+
+<% else %>
+
+<p>Apenas o administrador pode editar um produto</p>
+<%= link_to "Sair", destroy_user_session_path, method: :delete, :class => 'btn btn-danger'  %>
+
+<% end %>

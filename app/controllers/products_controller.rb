@@ -1,16 +1,16 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-before_filter :load_categories
+  before_filter :load_categories
 
   # GET /products
   # GET /products.json
-  def index
-    @products = Product.all
-  end
-
-  # GET /products/1
-  # GET /products/1.json
-  def show
+  def index    
+    @categories = Category.all
+    if !params[:category_id]
+      @products = Product.all
+    else
+      @products = Product.where("category_id = ?", params[:category_id]).order("created_at ASC")
+    end
   end
 
   # GET /products/new
@@ -29,7 +29,7 @@ before_filter :load_categories
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to products_url, notice: 'Produto criado com sucesso.' }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ before_filter :load_categories
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { redirect_to products_url, notice: 'Produto editado com sucesso.' }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }

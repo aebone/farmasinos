@@ -21,18 +21,19 @@
             </button>
           </div>
           <div class="navbar-collapse collapse" id="navbar-main">
+            <% if user_signed_in? %>
             <ul class="nav navbar-nav">
               <li>
-                <%= link_to "Categorias", categories_path %>
+                <%= link_to "Admin", admin_index_path %>
               </li>
               <li>
-                <%= link_to "Produtos", products_path %>
+                <%= link_to "Estoque", products_path %>
               </li>
             </ul>
+            <% end %>
             <ul class="nav navbar-nav navbar-right">
               <% if user_signed_in? %>
-                <li>Logado como <strong><%= current_user.email %></strong></li>
-                <li><%= link_to 'Editar perfil', edit_user_registration_path, :class => 'navbar-link' %></li>
+                <li><%= link_to current_user.email, edit_user_registration_path, :class => 'navbar-link' %></li>
                 <li><%= link_to "Sair", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
               <% else %>
                 <li><%= link_to "Cadastrar", new_user_registration_path, :class => 'navbar-link'  %></li>
@@ -51,5 +52,11 @@
       <%= yield %>
       
     </div>
+
+    <footer>
+      <div class="container">
+        <p align="center">Admin: admin@farmasinos.com | Senha: admin123<br>(Pode criar e editar produtos e categorias)</p>
+      </div>
+    </footer>
   </body>
 </html>
