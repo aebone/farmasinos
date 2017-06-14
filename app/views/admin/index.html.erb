@@ -1,10 +1,13 @@
 <% if current_user.id == 1 %>
-<%= link_to 'Nova Categoria', new_category_path %>
-<%= link_to 'Novo Produto', new_product_path %>
 
-
-<%= link_to 'Editar Categoria', categories_path %>
-<%= link_to 'Editar Produto', products_path %>
+<h2>Categoria</h2>
+<%= link_to 'Nova Categoria', new_category_path, class: "btn btn-lg btn-primary" %>&nbsp;
+<%= link_to 'Editar Categoria', categories_path, class: "btn btn-lg btn-warning" %>
+<hr>
+<h2>Produto</h2>
+<%= link_to 'Novo Produto', new_product_path, class: "btn btn-lg btn-primary" %>&nbsp;
+<%= link_to 'Editar Produto', products_path, class: "btn btn-lg btn-warning" %>
+<hr>
 
 <% else %>
 

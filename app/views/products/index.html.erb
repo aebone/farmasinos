@@ -5,6 +5,26 @@
 <% @categories.each do |c| %>
   <%= link_to(c.name,{:controller => "products",:action => "index", :category_id => c.id}, class: "btn btn-sm btn-primary") %> &nbsp;
 <% end %>
+
+<br><br>
+
+<h4>Ordenar por:</h4>
+<div class="row">
+<div class="col-md-4">
+<form>
+  <select name="sort" class="form-control">
+    <option value="name">Nome</option>
+    <option value="expires_on">Validade</option>
+  </select>
+  </div>
+  <div class="col-md-8">
+  <input type="submit" value="Ordenar" class="btn btn-primary"/>
+</form>
+</div>
+</div>
+
+<br>
+Ordenando por <strong> <% if @sort == "expires_on" %>Validade<% else %>Nome<% end %></strong>
 <hr>
 <% @products.each do |product| %>
 <div class="row">
@@ -18,7 +38,7 @@
     <p><strong>Quantidade:</strong> <%= product.quantity %></p>
     <p><strong>Categoria:</strong> <%= product.category.name %></p>
     <% if current_user.id == 1 %>
-    <p><%= link_to 'Editar', edit_product_path(product) %> | <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    <p><%= link_to 'Editar', edit_product_path(product), class: "btn btn-sm btn-warning" %> | <%= link_to 'Excluir', product, method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn btn-sm btn-danger" %></p>
     <% end %>
   </div>
 </div>

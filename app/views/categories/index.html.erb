@@ -6,8 +6,8 @@
 <p>
   <%= category.name %>
   <% if current_user.id == 1 %>
-    <%= link_to 'Editar', edit_category_path(category) %> | 
-    <%= link_to 'Excluir', category, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Editar', edit_category_path(category), class: "btn btn-sm btn-warning" %> | 
+    <%= link_to 'Excluir', category, method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn btn-sm btn-danger" %>
   <% end %>
 <% end %>
 </p>

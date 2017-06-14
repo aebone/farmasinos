@@ -7,9 +7,15 @@ class ProductsController < ApplicationController
   def index    
     @categories = Category.all
     if !params[:category_id]
-      @products = Product.all
+      @sort = params[:sort]
+      # sort = nil unless sort.in?(['expires_on', 'name'])
+      if @sort == nil
+        @products = Product.order("name ASC")
+      else
+        @products = Product.order(@sort)
+      end
     else
-      @products = Product.where("category_id = ?", params[:category_id]).order("created_at ASC")
+      @products = Product.where("category_id = ?", params[:category_id]).order("name ASC")
     end
   end
 
