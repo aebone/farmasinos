@@ -19,6 +19,3 @@
 
 # Ignore Byebug command history file.
 .byebug_history
-
-# Ignore carrierwave
-/config/initializers/carrierwave.rb
