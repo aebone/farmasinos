@@ -1,30 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<h3>Escolha uma categoria</h3>
-
-<% @categories.each do |c| %>
-  <%= link_to(c.name,{:controller => "products",:action => "index", :category_id => c.id}, class: "btn btn-sm btn-primary") %> &nbsp;
-<% end %>
-
-<br><br>
-
-<h4>Ordenar por:</h4>
-<div class="row">
-<div class="col-md-4">
 <form>
+
+<div class="row">
+<div class="col-md-2">
+<label class="pull-right">Categoria:</label>
+</div>
+<div class="col-md-4">
+<%= collection_select :category, :category_id, @categories, :id, :name, {}, class: "form-control" %>
+</div>
+</div>
+<div class="row">
+<div class="col-md-2">
+<label class="pull-right">Ordenar por:</label>
+</div>
+ <div class="col-md-4">
   <select name="sort" class="form-control">
     <option value="name">Nome</option>
     <option value="expires_on">Validade</option>
   </select>
   </div>
-  <div class="col-md-8">
-  <input type="submit" value="Ordenar" class="btn btn-primary"/>
+  <div class="col-md-5">
+  <%= submit_tag "Ordenar", class: "btn btn-large btn-primary" %>
+</div>
+</div>
 </form>
-</div>
-</div>
 
 <br>
-Ordenando por <strong> <% if @sort == "expires_on" %>Validade<% else %>Nome<% end %></strong>
+Ordenando por: <strong> <% if @sort == "expires_on" %>Validade<% else %>Nome<% end %></strong>
+<br>
+Id da Categoria: <strong> <%= @category_id %></strong>
 <hr>
 <% @products.each do |product| %>
 <div class="row">

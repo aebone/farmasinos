@@ -5,18 +5,17 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index    
-    @categories = Category.all
-    if !params[:category_id]
-      @sort = params[:sort]
-      # sort = nil unless sort.in?(['expires_on', 'name'])
-      if @sort == nil
-        @products = Product.order("name ASC")
-      else
-        @products = Product.order(@sort)
-      end
+
+    if !params[:sort] && !params[:category_id]
+      @sort = "name ASC"
+      @category_id = "Todas"
+      @products = Product.order(@sort)
     else
-      @products = Product.where("category_id = ?", params[:category_id]).order("name ASC")
+      @sort = params[:sort]
+      @category_id = params[:category][:category_id]
+      @products = Product.where("category_id = ?", @category_id).order(@sort)
     end
+    
   end
 
   # GET /products/new
@@ -79,6 +78,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :expires_on, :image, :category_id, :description, :quantity)
+      params.require(:product).permit(:name, :expires_on, :image, :category_id, :description, :quantity, :category)
     end
 end
